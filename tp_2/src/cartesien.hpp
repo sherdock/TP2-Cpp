@@ -14,7 +14,7 @@ class Cartesien : public Point //![3]
 public:
     Cartesien();
     Cartesien(double, double);
-    Cartesien(Polaire &);
+    Cartesien(const Polaire &);
     ~Cartesien();
     std::ostream &afficher(std::ostream &) const;
     double getX() const;

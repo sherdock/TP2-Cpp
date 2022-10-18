@@ -1,0 +1,14 @@
+Les foncteurs servent surtout à mémoriser des trucs( sinon les fcts suffisent)
+Ex : foncteur pour compter appels d'une fonction.
+
+Les lanbda sont du sucre syntaxique pour les foncteurs mais il est parfois plus utilre de les 
+utiliser que les lambda
+
+[1] Il faut ajouter le mot-clé typename pour préciser que iterator par 
+example est un type, vu que std::vector<T> n'existe formellement pas avant de l'instancier
+
+[2]error: cannot bind non-const lvalue reference of type ‘Cartesien&’ to an rvalue of type ‘Cartesien’ 
+    -> Mauvaise solution : Résolu en changeant la signature de la méthode ajouter dans
+    "nuage_implementation.cxx" :
+    void Nuage<T>::ajouter(T& point) -> void Nuage<T>::ajouter(T point)
+    -> Bonne solution : faire une réf constante void ajouter(const T &);

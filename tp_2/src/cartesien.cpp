@@ -12,7 +12,7 @@ Cartesien::Cartesien() : coordX(0.0), coordY(0.0)
 Cartesien::Cartesien(double x, double y) : coordX(x), coordY(y)
 {
 }
-Cartesien::Cartesien(Polaire &polaire)
+Cartesien::Cartesien(const Polaire &polaire)
 {
     double angle = polaire.getAngle();
     double distance = polaire.getDistance();
