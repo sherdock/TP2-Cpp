@@ -4,7 +4,7 @@
 #include <vector>
 // #include "point.hpp"
 #include "cartesien.hpp"
-// #include "polaire.hpp"
+#include "polaire.hpp"
 
 template <typename T>
 class Nuage

@@ -17,6 +17,8 @@ vector
 -
 cartesien.hpp
 ../src/cartesien.hpp
+polaire.hpp
+../src/polaire.hpp
 nuage_implementation.cxx
 ../src/nuage_implementation.cxx
 

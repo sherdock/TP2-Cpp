@@ -52,20 +52,43 @@ typename Nuage<T>::iterator Nuage<T>::end()
 //     return *vecteur_points[index];
 // }
 template <typename T>
-Cartesien barycentre_v1(const Nuage<T> &nuage)
+T barycentre_v1(const Nuage<T> &nuage)
 {
+    T barycentre;
     auto total = nuage.size();
     double x = 0;
     double y = 0;
-    for (auto point : nuage)
+    if (total > 0)
     {
-        Cartesien tmp;
-        point.convertir(tmp);
-        x += tmp.getX();
-        y += tmp.getY();
+
+        for (auto point : nuage)
+        {
+            Cartesien tmp;
+            point.convertir(tmp);
+            x += tmp.getX();
+            y += tmp.getY();
+        }
+        barycentre = Cartesien(x / total, y / total);
     }
 
-    return {x / total, y / total};
+    return barycentre;
+}
+
+template <>
+Polaire barycentre_v1<Polaire>(const Nuage<Polaire> &nuage)
+{
+    double a = 0.0;
+    double d = 0.0;
+    int n = 0;
+
+    for (const Polaire &p : nuage)
+    {
+        a += p.getAngle();
+        d += p.getDistance();
+        ++n;
+    }
+
+    return (n == 0 ? Polaire() : Polaire(a / n, d / n)); // Formule fausse bien entendu !
 }
 
 // Cartesien BarycentreCartesien::operator()(const Nuage<T> &Nuage<T>) const
