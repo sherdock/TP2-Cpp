@@ -77,28 +77,65 @@ T barycentre_v1(const Nuage<T> &nuage)
 template <>
 Polaire barycentre_v1<Polaire>(const Nuage<Polaire> &nuage)
 {
+    Polaire barycentre;
     double a = 0.0;
     double d = 0.0;
-    int n = 0;
-
-    for (const Polaire &p : nuage)
+    auto total = nuage.size();
+    if (total > 0)
     {
-        a += p.getAngle();
-        d += p.getDistance();
-        ++n;
+        for (const Polaire &p : nuage)
+        {
+            a += p.getAngle();
+            d += p.getDistance();
+        }
+        barycentre = Polaire(a / total, d / total);
     }
 
-    return (n == 0 ? Polaire() : Polaire(a / n, d / n)); // Formule fausse bien entendu !
+    return barycentre;
 }
 
-// Cartesien BarycentreCartesien::operator()(const Nuage<T> &Nuage<T>) const
-// {
-//     return barycentre(Nuage<T>);
-// }
+// C::value_type : type de ce qui est stocké dans le C
+// On peut donc se passer du typename T
+template <typename C>
+typename C::value_type barycentre_v2(const C &conteneur)
+{
 
-// Polaire BarycentrePolaire::operator()(const Nuage<T> &Nuage<T>) const
+    typename C::value_type barycentre;
+    double x = 0.0;
+    double y = 0.0;
+    auto total = conteneur.size();
+
+    if (total > 0)
+    {
+        for (auto point : conteneur)
+        {
+            Cartesien tmp;
+            point.convertir(tmp);
+            x += tmp.getX();
+            y += tmp.getY();
+        }
+        barycentre = Cartesien(x / total, y / total);
+    }
+
+    return barycentre;
+}
+
+// template <typename C>
+// Polaire barycentre_v2<Polaire>(const C<Polaire> &conteneur)
 // {
-//     Polaire p = {};
-//     barycentre(Nuage<T>).convertir(p);
-//     return p;
+//     Polaire barycentre;
+//     double a = 0.0;
+//     double d = 0.0;
+//     auto total = conteneur.size();
+//     if (total > 0)
+//     {
+//         for (const Polaire &p : conteneur)
+//         {
+//             a += p.getAngle();
+//             d += p.getDistance();
+//         }
+//         barycentre = Polaire(a / total, d / total);
+//     }
+
+//     return barycentre;
 // }

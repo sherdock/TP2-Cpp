@@ -12,3 +12,6 @@ example est un type, vu que std::vector<T> n'existe formellement pas avant de l'
     "nuage_implementation.cxx" :
     void Nuage<T>::ajouter(T& point) -> void Nuage<T>::ajouter(T point)
     -> Bonne solution : faire une réf constante void ajouter(const T &);
+[3] Nuage n'est pas un conteneur, on doit donc lui ajouter le value-type pour que le compilo 
+le considère comme tel.
+On utilise pour cela un using dans le classe Nuage, si on ajoute typename -> error  expected nested-name-specifier before T

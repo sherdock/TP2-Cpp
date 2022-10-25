@@ -14,6 +14,7 @@ public:
     using TemplateVector = typename std::vector<T>;
     using iterator = typename TemplateVector::iterator;
     using const_iterator = typename TemplateVector::const_iterator; //![1]
+    using value_type = T;                                           // [3]
 
     TemplateVector vecteur_points;
 
@@ -25,8 +26,6 @@ public:
 
     iterator begin();
     iterator end();
-
-    // Point &operator[](unsigned int const);
 };
 
 // Cartesien barycentre(Nuage const &nuage);
